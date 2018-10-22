@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<ui:composition template="template.xhtml">
+    <ui:define name="pageContent">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{redirectorBean.redirectToIndexIfObjectIsNotNull(authBean.currentUser.id)}"/>
+        </f:metadata>
+        <h:form>
+                <h:outputLabel for="email">#{msgs['page.login.label.email']}</h:outputLabel>
+                <h:inputText id="email" value="#{authBean.unauthenticatedUser.email}" required="true"
+                             label="email"/>
+
+                <h:outputLabel for="password">#{msgs['page.login.label.password']}</h:outputLabel>
+                <h:inputSecret id="password" value="#{authBean.unauthenticatedUser.password}" required="true"
+                            label="password"/>
+
+                <f:facet name="footer">
+                    <h:messages id="errorMessages" showDetail="false"/>
+                    <h:outputLabel id="errorMessage" value="#{authBean.errorMessage}" style="color:red"/>
+                    <h:commandButton style="margin-left:auto; margin-right:auto; display: table"
+                                     value="#{msgs['button.login']}" action="#{authBean.authenticateUser()}"
+                                     update="errorMessages"
+                    />
+                </f:facet>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

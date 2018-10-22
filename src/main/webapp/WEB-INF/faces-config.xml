@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<faces-config version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://xmlns.jcp.org/xml/ns/javaee
+        http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>nl</supported-locale>
+            <supported-locale>fr</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>Messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+        <message-bundle>ErrorMessages</message-bundle>
+    </application>
+
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{authBean.prepareLogin()}</from-action>
+            <if>#{true}</if>
+            <to-view-id>/login.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+
+    <factory>
+        <exception-handler-factory>
+            com.basicauth.template.exceptionHandlers.GlobalExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
+
+</faces-config>
